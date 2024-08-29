@@ -25,8 +25,23 @@ def recommend(movie):
 
 
 st.header('Movie Recommender System')
-similarity = pickle.load(open('similarity.pkl','rb'))
-movies = pickle.load(open('movie_list.pkl','rb'))
+try:
+    with open('similarity.pkl', 'rb') as f:
+        similarity = pickle.load(f)
+        print("similarity.pkl loaded successfully")
+except pickle.UnpicklingError as e:
+    print("Unpickling error with similarity.pkl:", e)
+except Exception as e:
+    print("Error with similarity.pkl:", e)
+
+try:
+    with open('movie_list.pkl', 'rb') as f:
+        movies = pickle.load(f)
+        print("movie_list.pkl loaded successfully")
+except pickle.UnpicklingError as e:
+    print("Unpickling error with movie_list.pkl:", e)
+except Exception as e:
+    print("Error with movie_list.pkl:", e)
 
 
 movie_list = movies['title'].values
